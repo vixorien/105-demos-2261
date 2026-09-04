@@ -30,7 +30,8 @@ namespace StringInputAndParsingDemo
 			Console.WriteLine();
 			Console.WriteLine("Hello\nWorld");
 			Console.WriteLine("A\tB");
-			Console.WriteLine("AAA\tB");
+			Console.WriteLine("AAA\tB"); 
+			Console.WriteLine("AAAAAAAAAAAAAAA\tB");
 
 			// String interpolation
 			// Another mechanism for combining strings & variables
@@ -38,9 +39,12 @@ namespace StringInputAndParsingDemo
 			Console.WriteLine(name + " ate a " + food + " yesterday");
 			Console.WriteLine($"{name} ate a {food} yesterday");
 
+			// String formatting
 			int amount = 10;
-			double price = 40;
-			Console.WriteLine($"{amount} objects cost {price:C2} each");
+			double price = 4000.00;
+			Console.WriteLine();
+			Console.WriteLine($"{amount:###.###} objects each cost {price:N}");
+			Console.WriteLine(price.ToString("C2"));
 
 			// Console input
 			Console.WriteLine();
@@ -55,6 +59,7 @@ namespace StringInputAndParsingDemo
 
 			// Parsing
 			// A mechanism for interpreting a string as a number
+			Console.WriteLine();
 			int age = int.Parse(ageStr);
 			Console.WriteLine("Your age doubled is: " + (age * 2));
 
