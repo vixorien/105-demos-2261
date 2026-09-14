@@ -8,21 +8,21 @@ namespace MethodDemo
 	{
 		static void Main(string[] args)
 		{
-			int age = GetUserInt("Enter your age: ");
-			Console.WriteLine("Your age: " + age);
+			int age = GetUserNumber("Enter your age: ");
+			Console.WriteLine("Your age is..." + age);
 
-			int cats = GetUserInt("Enter number of cats: ");
-			Console.WriteLine("You have " + cats + " cats");
-
+			int cats = GetUserNumber("How many cats: ");
+			Console.WriteLine("You have this many cats: " + cats);
 		}
 
 		/// <summary>
-		/// Prompts the user, parses their 
-		/// input and returns the value
+		/// Prompts the user with a specified
+		/// prompt string for a number
+		/// and parses it to an integer
 		/// </summary>
-		/// <param name="prompt">The prompt printed before input</param>
-		/// <returns>The int version of the user's input</returns>
-		static int GetUserInt(string prompt)
+		/// <param name="prompt">String to print before input</param>
+		/// <returns>Int parsed from user input</returns>
+		static int GetUserNumber(string prompt)
 		{
 			Console.Write(prompt);
 			string input = Console.ReadLine()!.Trim();
@@ -30,39 +30,64 @@ namespace MethodDemo
 		}
 
 		/// <summary>
-		/// Calculates the area of the given circle
+		/// Prompts the user for a number
+		/// and parses it to an integer
 		/// </summary>
-		/// <param name="radius">Radius of circle</param>
-		/// <returns>Area of circle as Pi * r * r</returns>
+		/// <returns>Int parsed from user input</returns>
+		static int GetUserNumber()
+		{
+			return GetUserNumber("Enter a number: ");
+		}
+
+		/// <summary>
+		/// Calculates the area of a circle
+		/// (Pi * r^2)
+		/// </summary>
+		/// <param name="radius">Radius of a circle</param>
+		/// <returns>Area of given circle</returns>
 		static double CalcCircleArea(double radius)
 		{
 			return Math.PI * radius * radius;
 		}
 
-		
-		static bool CirclesOverlap(
+		/// <summary>
+		/// Determines if two circles are overlapping
+		/// </summary>
+		/// <param name="x1">Circle 1's x position</param>
+		/// <param name="y1">Circle 1's y position</param>
+		/// <param name="r1">Circle 1's radius</param>
+		/// <param name="x2">Circle 2's x position</param>
+		/// <param name="y2">Circle 2's y position</param>
+		/// <param name="r2">Circle 2's radius</param>
+		/// <returns>True if circles overlap, false if not</returns>
+		public bool CirclesOverlap(
 			double x1, double y1, double r1, // Circle 1
 			double x2, double y2, double r2) // Circle 2
 		{
-			// Validate incoming data
+			// Validate incoming parameters
+			// Not handling negative radii
 			if (r1 <= 0 || r2 <= 0)
 			{
 				return false;
 			}
 
-			// Calculate the dist between circles
+			// Calc distance between circle centers
 			double xDiff = x1 - x2;
 			double yDiff = y1 - y2;
 			double dist = Math.Sqrt(xDiff * xDiff + yDiff * yDiff);
 
-			// One-liner for the final value
+			// Determine if the circles overlap
 			return r1 + r2 > dist;
 
-			// alternative:
+			// Alternatively:
 			//if (r1 + r2 > dist)
+			//{
 			//	return true;
+			//}
 			//else
+			//{
 			//	return false;
+			//}
 		}
 
 	}
