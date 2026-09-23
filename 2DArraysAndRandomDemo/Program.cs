@@ -1,89 +1,86 @@
 ﻿// Chris Cascioli
 // 9/23/26
-// Demo of Arrays of strings, 2D arrays and random numbers
+// Demo of arrays of objects, multi-dimensional arrays and random numbers
 
-namespace ArraysAndRandomDemo
+namespace ArrayAndRandomDemo
 {
 	internal class Program
 	{
 		static void Main(string[] args)
 		{
-			// Create several arrays
+			// == Arrays of objects ==
+			
+			// Array of primitives
 			int[] numbers = new int[5];
+			numbers[0] += 8; // Works fine
+			Console.WriteLine("Number: " + numbers[0]);
+
 			string[] names = new string[10];
+			Console.WriteLine("Name: " + names[0]);
 
-			string today = "Wednesday";
-			Console.WriteLine(today.ToUpper());
+			// Will crash since the element is NULL!
+			// - No string exists here yet
+			//Console.WriteLine("Upper case: " + names[0].ToUpper());
 
-			// Print the upper case version of the first name
-			//Console.WriteLine(names[0].ToUpper());
-			// Error!  names[0] is current NULL!
+			// === Multi-dimensional arrays ===
 
-			// === Multidimensional arrays ===
+			// One dimensional array
+			int[] oneDim = new int[6];
+			int[][] jagged = new int[5][];
+			jagged[0] = new int[4];
+			jagged[1] = new int[4];
+			jagged[2] = new int[7];
+			jagged[3] = new int[2];
+			jagged[4] = new int[3];
 
-			// Jagged array
-			// - Requires creating the "outer" array first
-			int[][] jaggedGrid = new int[5][];
+			// Set the data in the jagged array
+			jagged[2][3] = 99;
 
-			// Now we can create the "inner" arrays
-			jaggedGrid[0] = new int[4];
-			jaggedGrid[1] = new int[4];
-			jaggedGrid[2] = new int[2];
-			jaggedGrid[3] = new int[7];
-			jaggedGrid[4] = new int[3];
+			// Alternatively: A true multidimensional array
+			int[,] multiDim = new int[5, 3];
+			multiDim[0, 0] = 99;
+			multiDim[0, 1] = 101;
 
-			// Using a jagged array
-			jaggedGrid[0][0] = 99;
-			jaggedGrid[0][1] = 101;
-			// Etc.
+			// Lets get weird
+			int[][][][] uhh = new int[5][][][];
+			int[,,,,,,,,] what = new int[2,2,2,2,2,2,2,2,2];
 
-			// True multi-dimension arrays
-			int[,] regularGrid = new int[5, 3];
-
-			// Fill up with some numbers
-			regularGrid[0, 0] = 99;
-			regularGrid[0, 1] = 99;
-			regularGrid[0, 2] = 99;
-
-			// Creating a literal multi-dimensional array
-			double[,] matrix =
-			{
-				{ 1, 0, 0, 0 },
-				{ 0, 1, 0, 0 },
-				{ 0, 0, 1, 0 },
-				{ 4, 5, 6, 1 }
+			int[,] matrix = {
+				{ 1, 0, 0 },
+				{ 0, 1, 0 },
+				{ 0, 0, 1 },
+				{ 4, 5, 6 }
 			};
 
-			// Print the matrix
-			// - Note: .Length gives the TOTAL number of elements
-			for (int y = 0; y < matrix.GetLength(1); y++)
+			Console.WriteLine("Matrix elements: " + matrix.Length);
+
+			// Print the 2D array as rows and columns of numbers
+			for (int row = 0; row < matrix.GetLength(0); row++)
 			{
-				for (int x = 0; x < matrix.GetLength(0); x++)
+				for (int col = 0; col < matrix.GetLength(1); col++)
 				{
-					Console.Write(matrix[y,x] + " ");
+					Console.Write(matrix[row, col] + " ");
 				}
 				Console.WriteLine();
 			}
 
-			// You can get weird with it
-			int[,,,,,,,] what = new int[3, 3, 3, 3, 3, 3, 3, 3];
 
 			// === Random numbers ===
-
-			// First, create the Random object
+			// Step 1: Create a "Random" object
 			Random rng = new Random();
-			
+
+			// Step 2: Call functions to generate numbers
 			Console.WriteLine();
-			Console.WriteLine("10 random numbers: ");
 
-			// Generating a non-negative random number
-			Console.WriteLine(rng.Next());
-			Console.WriteLine(rng.Next(10));
-			Console.WriteLine(rng.Next(-10, 10));
+			// Options for integers
+			Console.WriteLine(rng.Next()); // 0 up to MaxValue (exclusive)
+			Console.WriteLine(rng.Next(10)); // 0 up to given max (exclusive)
+			Console.WriteLine(rng.Next(-20, 20)); // Min up to given max (exclusive)
 
-			Console.WriteLine(rng.NextDouble());
-			Console.WriteLine(rng.NextDouble() * 10);
-			Console.WriteLine(rng.NextDouble() * 20 - 10);
+			Console.WriteLine(rng.NextDouble()); // 0 - 1 (exclusive upper bound)
+			Console.WriteLine(rng.NextDouble() * 10); // 0 - 10 (exclusive)
+			Console.WriteLine(rng.NextDouble() * 40 - 20); // -20 - 20 (exclusive)
+
 		}
 	}
 }
